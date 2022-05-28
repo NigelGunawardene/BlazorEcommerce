@@ -18,7 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\BlazorEcommerce.Infrastructure\BlazorEcommerce.Infrastructure.csproj" />
+        <ProjectReference Include="..\BlazorEcommerce.Infrastructure\BlazorEcommerce.DataAccess.csproj" />
         <ProjectReference Include="..\Client\BlazorEcommerce.Client.csproj" />
         <ProjectReference Include="..\Shared\BlazorEcommerce.Shared.csproj" />
     </ItemGroup>
