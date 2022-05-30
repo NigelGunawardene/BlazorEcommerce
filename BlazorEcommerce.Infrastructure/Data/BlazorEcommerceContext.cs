@@ -1,4 +1,5 @@
-﻿using BlazorEcommerce.Shared.Entities;
+﻿using BlazorEcommerce.DataAccess.Seed.Helpers;
+using BlazorEcommerce.Shared.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,29 +12,12 @@ public class BlazorEcommerceContext : DbContext
 {
     public BlazorEcommerceContext(DbContextOptions<BlazorEcommerceContext> options) : base(options) { }
 
-    public DbSet<Product> Products { get; set; }
+    public DbSet<Product> Products { get; set; } = default!;
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        // Add Products here
-        modelBuilder.Entity<Product>().HasData(
-            new Product
-            {
-                Id = 1,
-                Title = "prod3",
-                Description = "proddesc1",
-                ImageUrl = "https://nerdist.com/wp-content/uploads/2021/04/Aliens-xenomorph.jpg",
-                Price = 100
-            },
-            new Product
-            {
-                Id = 2,
-                Title = "prod2",
-                Description = "proddesc1",
-                ImageUrl = "https://nerdist.com/wp-content/uploads/2021/04/Aliens-xenomorph.jpg",
-                Price = 100
-            }
-        );
-    }
+    //protected override void OnModelCreating(ModelBuilder modelBuilder)
+    //{
+    //    // Add Products here
+    //    modelBuilder.Entity<Product>().HasData(ExcelReader.ReadExcelAndOutputList<Product>("filePath", typeof(Product).UnderlyingSystemType.FullName));
+    //}
 }
 

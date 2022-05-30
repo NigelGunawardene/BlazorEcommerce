@@ -17,17 +17,6 @@ public class ProductService : IProductService
             Message = "working",
             Success = true,
             Data = await _context.Products.ToListAsync()
-
-            //Data = new List<Product>()
-            //{
-            //    new Product
-            //    {
-            //        Title = "asd",
-            //        Description = "dfg",
-            //        ImageUrl = "fhg",
-            //        Price = 1
-            //    }
-            //}
         };
         return response;
     }

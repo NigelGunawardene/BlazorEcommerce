@@ -1,4 +1,5 @@
 ﻿global using BlazorEcommerce.Shared;
+using BlazorEcommerce.DataAccess.Seed;
 using BlazorEcommerce.Infrastructure.Data;
 using BlazorEcommerce.Server.Interfaces;
 using BlazorEcommerce.Server.Services;
@@ -10,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<BlazorEcommerceContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Development"), x => x.MigrationsAssembly("BlazorEcommerce.Infrastructure.Migrations"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Development")); //, x => x.MigrationsAssembly("BlazorEcommerce.Infrastructure.Migrations")
 });
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
@@ -19,6 +20,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IProductService, ProductService>();
+
+builder.Services.AddScoped<ContextSeeder>();
 
 var app = builder.Build();
 
@@ -41,6 +44,10 @@ app.UseSwagger();
 app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
+
+SeedDatabase();
+
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -51,3 +58,13 @@ app.MapControllers();
 app.MapFallbackToFile("index.html");
 
 app.Run();
+
+
+async void SeedDatabase() //can be placed at the very bottom under app.Run()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbInitializer = scope.ServiceProvider.GetRequiredService<ContextSeeder>();
+        await dbInitializer.SeedAsync();
+    }
+}
