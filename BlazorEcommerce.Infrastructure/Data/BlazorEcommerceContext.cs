@@ -13,6 +13,7 @@ public class BlazorEcommerceContext : DbContext
     public BlazorEcommerceContext(DbContextOptions<BlazorEcommerceContext> options) : base(options) { }
 
     public DbSet<Product> Products { get; set; } = default!;
+    public DbSet<User> Users { get; set; } = default!;
 
     //protected override void OnModelCreating(ModelBuilder modelBuilder)
     //{

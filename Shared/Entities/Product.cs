@@ -12,4 +12,6 @@ public class Product : BaseEntity<int>
     public string Description { get; set; } = string.Empty;
     public string ImageUrl { get; set; }
     public double Price { get; set; }
+    public int QuantityInStock { get; set; }
+
 }

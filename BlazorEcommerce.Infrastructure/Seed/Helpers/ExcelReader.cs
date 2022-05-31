@@ -16,16 +16,17 @@ public class ExcelReader
 
     public static IList ReadExcelAndOutputList<T>(string filePath, string type)
     {
-        DataTable dt = CreateExcelReader(filePath);
+        string blazorEcommerceSharedDllFilePath = "E:/Projects/CyberMuffin/Repos/BlazorEcommerce/Server/bin/Debug/net6.0/BlazorEcommerce.Shared.dll";
+        DataTable dt = ReadExcelAndConvertToDatatable(filePath);
         //var assembly = Assembly.GetExecutingAssembly();
-        var assembly = Assembly.LoadFile("E:/Projects/CyberMuffin/Repos/BlazorEcommerce/Server/bin/Debug/net6.0/BlazorEcommerce.Shared.dll");
+        var assembly = Assembly.LoadFile(blazorEcommerceSharedDllFilePath);
         Type typeOfList = assembly.GetType(type);
-        var list = ConvertDataTableToList<T>(dt, typeOfList);
+        var list = ConvertDataTableToList(dt, typeOfList); //var list = ConvertDataTableToList<T>(dt, typeOfList);
         //var list = ConvertDataTable<Product>(dt);
         return list;
     }
 
-    private static DataTable CreateExcelReader(string filePath)
+    private static DataTable ReadExcelAndConvertToDatatable(string filePath)
     {
         using (var excelPackage = new ExcelPackage(new FileInfo(filePath))) //filePath here
         {
@@ -51,17 +52,22 @@ public class ExcelReader
             return dataTable;
         }
     }
-    private static IList ConvertDataTableToList<T>(DataTable dt, Type typeOfList)
+    private static IList ConvertDataTableToList(DataTable dt, Type typeOfList) //private static IList ConvertDataTableToList<T>(DataTable dt, Type typeOfList)
     {
-        var data = CreateList(typeOfList);
-        //var data = new List<dynamic>();
-        foreach (DataRow row in dt.Rows)
+        switch (typeOfList.Name)
         {
-            T item = GetItem<T>(row);
-            //var castedItem = Convert.ChangeType(item, typeOfList);
-            data.Add(item);
+            case "Product":
+                var data = new List<Product>();
+                foreach (DataRow row in dt.Rows)
+                {
+                    Product item = GetItem<Product>(row);
+                    data.Add(item);
+                }
+                return data;
+                break;
+            default:
+                return null;
         }
-        return data;
     }
 
     private static T GetItem<T>(DataRow datarow)

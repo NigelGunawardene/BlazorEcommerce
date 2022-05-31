@@ -18,23 +18,32 @@ public class ContextSeeder
     }
     public async Task SeedAsync()
     {
+        // File paths go here
+        string productFilePath = "E:/Projects/CyberMuffin/Repos/BlazorEcommerce/SeedingResources/Products.xlsx";
+        string userFilePath = "E:/Projects/CyberMuffin/Repos/BlazorEcommerce/SeedingResources/Users.xlsx";
+
+        // For each entity that needs to be seeded, use the code block below:
+
+        // Products
         if (!_context.Products.Any())
         {
-            var genericList = ExcelReader.ReadExcelAndOutputList<Product>("E:/Projects/CyberMuffin/Repos/BlazorEcommerce/SeedingResources/Products.xlsx", typeof(Product).UnderlyingSystemType.FullName);
-            var productList = new List<Product>();
-            foreach (var product in genericList)
-            {
-                productList.Add(new Product
-                {
-                    Title = product.ToString()
-                });
-            }
-
+            var productList = ExcelReader.ReadExcelAndOutputList<Product>(productFilePath, typeof(Product).UnderlyingSystemType.FullName);
             foreach (var product in productList)
             {
-                _context.Products.Add(product);
+                await _context.Products.AddAsync((Product)product);
             }
+            await _context.SaveChangesAsync();
+        }
 
+        // Users
+        if (!_context.Users.Any())
+        {
+            var userList = ExcelReader.ReadExcelAndOutputList<User>(userFilePath, typeof(User).UnderlyingSystemType.FullName);
+            foreach (var user in userList)
+            {
+                await _context.Users.AddAsync((User)user);
+            }
+            await _context.SaveChangesAsync();
         }
     }
 }
