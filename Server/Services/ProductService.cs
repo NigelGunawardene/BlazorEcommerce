@@ -4,9 +4,9 @@ namespace BlazorEcommerce.Server.Services;
 
 public class ProductService : IProductService
 {
-    private readonly BlazorEcommerceContext _context;
+    private readonly ApplicationContext _context;
 
-    public ProductService(BlazorEcommerceContext context)
+    public ProductService(ApplicationContext context)
     {
         _context = context;
     }

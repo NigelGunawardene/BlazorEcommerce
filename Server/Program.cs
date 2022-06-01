@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<BlazorEcommerceContext>(options =>
+builder.Services.AddDbContext<ApplicationContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Development")); //, x => x.MigrationsAssembly("BlazorEcommerce.Infrastructure.Migrations")
 });

@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 namespace BlazorEcommerce.DataAccess.Seed;
 public class ContextSeeder
 {
-    private BlazorEcommerceContext _context;
+    private ApplicationContext _context;
 
-    public ContextSeeder(BlazorEcommerceContext context)
+    public ContextSeeder(ApplicationContext context)
     {
         _context = context;
     }
     public async Task SeedAsync()
     {
         // File paths go here
-        string productFilePath = "E:/Projects/CyberMuffin/Repos/BlazorEcommerce/SeedingResources/Products.xlsx";
-        string userFilePath = "E:/Projects/CyberMuffin/Repos/BlazorEcommerce/SeedingResources/Users.xlsx";
+        string productFilePath = @"..\SeedingResources\Products.xlsx";
+        string userFilePath = @"..\SeedingResources\Users.xlsx";
 
         // For each entity that needs to be seeded, use the code block below:
 

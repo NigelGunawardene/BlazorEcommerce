@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BlazorEcommerce.Infrastructure.Data;
-public class BlazorEcommerceContext : DbContext
+public class ApplicationContext : DbContext
 {
-    public BlazorEcommerceContext(DbContextOptions<BlazorEcommerceContext> options) : base(options) { }
+    public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 
     public DbSet<Product> Products { get; set; } = default!;
     public DbSet<User> Users { get; set; } = default!;

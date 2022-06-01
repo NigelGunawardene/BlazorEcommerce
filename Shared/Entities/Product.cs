@@ -13,5 +13,5 @@ public class Product : BaseEntity<int>
     public string ImageUrl { get; set; }
     public double Price { get; set; }
     public int QuantityInStock { get; set; }
-
+    public bool OnSale { get; set; }
 }

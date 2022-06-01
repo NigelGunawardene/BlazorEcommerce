@@ -13,16 +13,12 @@ using System.Threading.Tasks;
 namespace BlazorEcommerce.DataAccess.Seed.Helpers;
 public class ExcelReader
 {
-
-    public static IList ReadExcelAndOutputList<T>(string filePath, string type)
+    public static IList ReadExcelAndOutputList<T>(string filePath, string objectType)
     {
         string blazorEcommerceSharedDllFilePath = "E:/Projects/CyberMuffin/Repos/BlazorEcommerce/Server/bin/Debug/net6.0/BlazorEcommerce.Shared.dll";
         DataTable dt = ReadExcelAndConvertToDatatable(filePath);
-        //var assembly = Assembly.GetExecutingAssembly();
-        var assembly = Assembly.LoadFile(blazorEcommerceSharedDllFilePath);
-        Type typeOfList = assembly.GetType(type);
-        var list = ConvertDataTableToList(dt, typeOfList); //var list = ConvertDataTableToList<T>(dt, typeOfList);
-        //var list = ConvertDataTable<Product>(dt);
+        Type type = Assembly.LoadFile(blazorEcommerceSharedDllFilePath).GetType(objectType);
+        var list = ConvertDataTableToList<T>(dt, type);
         return list;
     }
 
@@ -52,22 +48,15 @@ public class ExcelReader
             return dataTable;
         }
     }
-    private static IList ConvertDataTableToList(DataTable dt, Type typeOfList) //private static IList ConvertDataTableToList<T>(DataTable dt, Type typeOfList)
+    private static IList ConvertDataTableToList<T>(DataTable dt, Type typeOfList) //private static IList ConvertDataTableToList<T>(DataTable dt, Type typeOfList)
     {
-        switch (typeOfList.Name)
+        var data = new List<T>();
+        foreach (DataRow row in dt.Rows)
         {
-            case "Product":
-                var data = new List<Product>();
-                foreach (DataRow row in dt.Rows)
-                {
-                    Product item = GetItem<Product>(row);
-                    data.Add(item);
-                }
-                return data;
-                break;
-            default:
-                return null;
+            T item = GetItem<T>(row);
+            data.Add(item);
         }
+        return data;
     }
 
     private static T GetItem<T>(DataRow datarow)
@@ -88,11 +77,11 @@ public class ExcelReader
         return obj;
     }
 
-    private static IList? CreateList(Type t)
-    {
-        var listType = typeof(List<>);
-        var constructedListType = listType.MakeGenericType(t);
-        var instance = (IList)Activator.CreateInstance(constructedListType);
-        return instance;
-    }
+    //private static IList? CreateList(Type t)
+    //{
+    //    var listType = typeof(List<>);
+    //    var constructedListType = listType.MakeGenericType(t);
+    //    var instance = (IList)Activator.CreateInstance(constructedListType);
+    //    return instance;
+    //}
 }
