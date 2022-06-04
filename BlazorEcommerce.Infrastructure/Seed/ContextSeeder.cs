@@ -27,7 +27,7 @@ public class ContextSeeder
         // Products
         if (!_context.Products.Any())
         {
-            var productList = ExcelReader.ReadExcelAndOutputList<Product>(productFilePath, typeof(Product).UnderlyingSystemType.FullName);
+            var productList = ExcelReader.ReadExcelAndOutputList<Product>(productFilePath);
             foreach (var product in productList)
             {
                 await _context.Products.AddAsync((Product)product);
@@ -38,7 +38,7 @@ public class ContextSeeder
         // Users
         if (!_context.Users.Any())
         {
-            var userList = ExcelReader.ReadExcelAndOutputList<User>(userFilePath, typeof(User).UnderlyingSystemType.FullName);
+            var userList = ExcelReader.ReadExcelAndOutputList<User>(userFilePath);
             foreach (var user in userList)
             {
                 await _context.Users.AddAsync((User)user);

@@ -13,12 +13,12 @@ using System.Threading.Tasks;
 namespace BlazorEcommerce.DataAccess.Seed.Helpers;
 public class ExcelReader
 {
-    public static IList ReadExcelAndOutputList<T>(string filePath, string objectType)
+    public static IList ReadExcelAndOutputList<T>(string filePath)
     {
-        string blazorEcommerceSharedDllFilePath = "E:/Projects/CyberMuffin/Repos/BlazorEcommerce/Server/bin/Debug/net6.0/BlazorEcommerce.Shared.dll";
+        //string blazorEcommerceSharedDllFilePath = "E:/Projects/CyberMuffin/Repos/BlazorEcommerce/Server/bin/Debug/net6.0/BlazorEcommerce.Shared.dll";
         DataTable dt = ReadExcelAndConvertToDatatable(filePath);
-        Type type = Assembly.LoadFile(blazorEcommerceSharedDllFilePath).GetType(objectType);
-        var list = ConvertDataTableToList<T>(dt, type);
+        //Type type = Assembly.LoadFile(blazorEcommerceSharedDllFilePath).GetType(objectType);
+        var list = ConvertDataTableToList<T>(dt);
         return list;
     }
 
@@ -48,7 +48,7 @@ public class ExcelReader
             return dataTable;
         }
     }
-    private static IList ConvertDataTableToList<T>(DataTable dt, Type typeOfList) //private static IList ConvertDataTableToList<T>(DataTable dt, Type typeOfList)
+    private static IList ConvertDataTableToList<T>(DataTable dt) //private static IList ConvertDataTableToList<T>(DataTable dt, Type typeOfList)
     {
         var data = new List<T>();
         foreach (DataRow row in dt.Rows)
