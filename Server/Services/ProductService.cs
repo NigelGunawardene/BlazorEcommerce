@@ -14,10 +14,12 @@ public class ProductService : IProductService
     {
         var response = new ServiceResponse<List<Product>>
         {
-            Message = "working",
+            Message = "All Products",
             Success = true,
             Data = await _context.Products.ToListAsync()
         };
+
+        response.Data.ForEach(item => item.ImageUrl = @"./images/dota.jpg");
         return response;
     }
 }

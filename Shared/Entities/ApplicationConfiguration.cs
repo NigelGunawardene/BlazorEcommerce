@@ -1,0 +1,15 @@
+﻿using BlazorEcommerce.Shared.Common;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BlazorEcommerce.Shared.Entities;
+public class ApplicationConfiguration : BaseEntity<int>
+{
+    public string? AppName { get; set; }
+    public string? WelcomeMessage { get; set; }
+    public string? PrimaryColor { get; set; }
+    public string? SecondaryColor { get; set; }
+}

@@ -12,8 +12,12 @@ public class ApplicationContext : DbContext
 {
     public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 
+    public DbSet<ApplicationConfiguration> ApplicationConfiguration { get; set; } = default!;
     public DbSet<Product> Products { get; set; } = default!;
     public DbSet<User> Users { get; set; } = default!;
+
+
+
 
     //protected override void OnModelCreating(ModelBuilder modelBuilder)
     //{
