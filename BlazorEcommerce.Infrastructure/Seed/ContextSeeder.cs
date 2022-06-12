@@ -21,8 +21,21 @@ public class ContextSeeder
         // File paths go here
         string productFilePath = @"..\SeedingResources\Products.xlsx";
         string userFilePath = @"..\SeedingResources\Users.xlsx";
+        string appConfigFilePath = @"..\SeedingResources\ApplicationConfiguration.xlsx";
 
         // For each entity that needs to be seeded, use the code block below:
+
+        // AppConfig
+        if (!_context.ApplicationConfiguration.Any())
+        {
+            var appConfig = ExcelReader.ReadExcelAndOutputList<ApplicationConfiguration>(appConfigFilePath);
+            foreach (var singleAppConfig in appConfig)
+            {
+                await _context.ApplicationConfiguration.AddAsync((ApplicationConfiguration)singleAppConfig);
+            }
+            await _context.SaveChangesAsync();
+        }
+
 
         // Products
         if (!_context.Products.Any())

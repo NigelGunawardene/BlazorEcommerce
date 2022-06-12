@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace BlazorEcommerce.Server.Services;
+﻿namespace BlazorEcommerce.Server.Services;
 
 public class ProductService : IProductService
 {
@@ -18,8 +16,6 @@ public class ProductService : IProductService
             Success = true,
             Data = await _context.Products.ToListAsync()
         };
-
-        response.Data.ForEach(item => item.ImageUrl = @"./images/dota.jpg");
         return response;
     }
 }

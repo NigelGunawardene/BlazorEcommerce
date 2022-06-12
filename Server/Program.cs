@@ -19,6 +19,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IAppConfigService, AppConfigService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddScoped<ContextSeeder>();
