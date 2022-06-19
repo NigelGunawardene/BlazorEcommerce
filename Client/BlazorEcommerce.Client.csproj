@@ -1,36 +1,44 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="Pages\ProductDetails.razor" />
-  </ItemGroup>
+    <ItemGroup>
+      <Compile Remove="Shared\MainLayout.razor.cs" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Fluxor.Blazor.Web" Version="5.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.5" PrivateAssets="all" />
-    <PackageReference Include="MudBlazor" Version="6.0.10" />
-  </ItemGroup>
+    <ItemGroup>
+        <Content Remove="Pages\ProductDetails.razor" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Shared\BlazorEcommerce.Shared.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Fluxor.Blazor.Web" Version="5.4.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.5" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.5" PrivateAssets="all" />
+        <PackageReference Include="MudBlazor" Version="6.0.10" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\ProductDetails.razor" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Shared\BlazorEcommerce.Shared.csproj" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\ProductDetails.razor" />
-  </ItemGroup>
+    <ItemGroup>
+        <UpToDateCheckInput Remove="Pages\ProductDetails.razor" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Include="Pages\ProductDetails.razor" />
-  </ItemGroup>
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="Pages\ProductDetails.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Shared\MainLayout.razor.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="Pages\ProductDetails.razor" />
+    </ItemGroup>
 
 </Project>
