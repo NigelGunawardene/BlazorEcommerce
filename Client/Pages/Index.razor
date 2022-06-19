@@ -1,5 +1,8 @@
 ﻿@page "/"
-@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+@*@inherits Fluxor.Blazor.Web.Components.FluxorComponent*@
+@*the above line is needed to refresh the page on state change*@
+@*Instead of inheriting as above, we can use IDisposable and use code behind class*@
+@implements IDisposable
 
 <PageTitle>Index</PageTitle>
 

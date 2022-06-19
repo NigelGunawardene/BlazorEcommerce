@@ -1,6 +1,4 @@
-﻿
-
-namespace BlazorEcommerce.Server.Services;
+﻿namespace BlazorEcommerce.Server.Services;
 
 public class AppConfigService : IAppConfigService
 {
