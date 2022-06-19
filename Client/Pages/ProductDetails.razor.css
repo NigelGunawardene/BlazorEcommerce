@@ -1,0 +1,27 @@
+﻿.price {
+    color: green;
+}
+
+.media-img {
+    max-height: 50rem;
+    max-width: 50rem;
+    border-radius: 6px;
+    margin: 0 10px 10px 10px
+}
+
+.media-img-wrapper {
+    max-height: 50rem;
+    max-width: 50rem;
+    text-align: center;
+}
+
+@media (max-width: 1023.98px) {
+    .media-img {
+        max-width: 30rem;
+    }
+
+    .media-img-wrapper {
+        width: 100%;
+        height: auto;
+    }
+}

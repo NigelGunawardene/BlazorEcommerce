@@ -1,9 +1,9 @@
 ﻿@page "/product/{id:int}"
-@inject IClientProductService ProductService
+@*@inject IClientProductService ProductService*@
 
 <h3>ProductDetails</h3>
 
-@if(@product == null)
+@if(product == null)
 {
     <span>Loading product...</span>
 }
@@ -22,7 +22,7 @@ else
     </div>
 }
 
-@code {
+@*@code {
     private Product product = null;
 
     [Parameter]
@@ -32,4 +32,4 @@ else
     {
         product = ProductService.Products.Find(p => p.Id == Id);
     }
-}
+}*@

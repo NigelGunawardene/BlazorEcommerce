@@ -7,14 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Remove="Shared\MainLayout.razor.cs" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Content Remove="Pages\ProductDetails.razor" />
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="Fluxor.Blazor.Web" Version="5.4.0" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.5" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.5" PrivateAssets="all" />
@@ -23,22 +15,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Shared\BlazorEcommerce.Shared.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <UpToDateCheckInput Remove="Pages\ProductDetails.razor" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <_ContentIncludedByDefault Remove="Pages\ProductDetails.razor" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Content Include="Shared\MainLayout.razor.cs" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Include="Pages\ProductDetails.razor" />
     </ItemGroup>
 
 </Project>

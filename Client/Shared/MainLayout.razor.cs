@@ -1,12 +1,11 @@
-﻿//namespace BlazorEcommerce.Client.Shared;
+﻿namespace BlazorEcommerce.Client.Shared;
 
-//partial class MainLayout : ComponentBase
-//{
-//    [Parameter]
-//    public bool _drawerOpen { get; set; } = true
+public partial class MainLayout
+{
+    bool _drawerOpen { get; set; } = true;
 
-//    void DrawerToggle()
-//    {
-//        _drawerOpen = !_drawerOpen;
-//    }
-//}
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}
