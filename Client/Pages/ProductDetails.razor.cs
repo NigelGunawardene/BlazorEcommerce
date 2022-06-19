@@ -4,14 +4,25 @@ partial class ProductDetails
     [Inject]
     private IClientProductService ProductService { get; set; }
 
-    public Product product = null;
+    public Product? product = null;
 
     [Parameter]
     public int Id { get; set; }
+    private string message = string.Empty;
 
 
     protected override async Task OnParametersSetAsync()
     {
-        product = ProductService.Products.Find(p => p.Id == Id);
+        message = "loading product..";
+        var result = await ProductService.GetProduct(Id);
+        if (!result.Success)
+        {
+            message = result.Message;
+        }
+        else
+        {
+            product = result.Data;
+        }
+        //product = ProductService.Products.Find(p => p.Id == Id);
     }
 }

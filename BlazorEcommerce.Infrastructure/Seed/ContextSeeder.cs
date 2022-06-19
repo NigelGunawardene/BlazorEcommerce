@@ -22,6 +22,7 @@ public class ContextSeeder
         string productFilePath = @"..\SeedingResources\Products.xlsx";
         string userFilePath = @"..\SeedingResources\Users.xlsx";
         string appConfigFilePath = @"..\SeedingResources\ApplicationConfiguration.xlsx";
+        string productCategoriesFilePath = @"..\SeedingResources\ProductCategories.xlsx";
 
         // For each entity that needs to be seeded, use the code block below:
 
@@ -55,6 +56,17 @@ public class ContextSeeder
             foreach (var user in userList)
             {
                 await _context.Users.AddAsync((User)user);
+            }
+            await _context.SaveChangesAsync();
+        }
+
+        // ProductCategories
+        if (!_context.ProductCategories.Any())
+        {
+            var productCategoriesList = ExcelReader.ReadExcelAndOutputList<ProductCategory>(productCategoriesFilePath);
+            foreach (var productCategory in productCategoriesList)
+            {
+                await _context.ProductCategories.AddAsync((ProductCategory)productCategory);
             }
             await _context.SaveChangesAsync();
         }

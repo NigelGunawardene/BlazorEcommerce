@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BlazorEcommerce.Shared.Entities;
-public class WIshlistItem
+public class WishlistItem
 {
 }

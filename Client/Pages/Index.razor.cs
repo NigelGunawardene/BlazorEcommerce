@@ -1,22 +1,22 @@
 ﻿namespace BlazorEcommerce.Client.Pages;
 
-public partial class Index
+public partial class Index : IDisposable
 {
-    [Inject]
-    private IAppConfigService appConfigService { get; set; }
+    //[Inject]
+    //private IAppConfigService appConfigService { get; set; }
 
     [Inject]
     private IState<AppConfigState> AppConfigState { get; set; }
 
-    [Inject]
-    private IDispatcher Dispatcher { get; set; }
+    //[Inject]
+    //private IDispatcher Dispatcher { get; set; }
 
 
-    protected override async Task OnInitializedAsync()
-    {
-        var action = new SetAppConfigAction(await appConfigService.GetApplicationConfiguration());
-        Dispatcher.Dispatch(action);
-    }
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    var action = new SetAppConfigAction(await appConfigService.GetApplicationConfiguration());
+    //    Dispatcher.Dispatch(action);
+    //}
 
     // these 3 methods handle the reloading of the page on state change
     // Hook the state changed on page render, and unhook it at the end of component lifecycle
@@ -28,7 +28,7 @@ public partial class Index
         }
     }
 
-    public void StateChanged(object sender, EventArgs args)
+    public void StateChanged(object? sender, EventArgs args)
     {
         InvokeAsync(StateHasChanged);
     }

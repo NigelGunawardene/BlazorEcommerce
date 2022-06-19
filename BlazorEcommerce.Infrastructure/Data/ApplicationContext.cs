@@ -15,6 +15,7 @@ public class ApplicationContext : DbContext
     public DbSet<ApplicationConfiguration> ApplicationConfiguration { get; set; } = default!;
     public DbSet<Product> Products { get; set; } = default!;
     public DbSet<User> Users { get; set; } = default!;
+    public DbSet<ProductCategory> ProductCategories { get; set; } = default!;
 
 
 

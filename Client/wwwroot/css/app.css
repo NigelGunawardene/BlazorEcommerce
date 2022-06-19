@@ -34,6 +34,16 @@ a, .btn-link {
     color: red;
 }
 
+.media {
+    display: flex;
+    /*text-align: center;*/
+    align-items: flex-start;
+}
+
+.media-body {
+    flex: 1;
+}
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
@@ -62,3 +72,5 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+
