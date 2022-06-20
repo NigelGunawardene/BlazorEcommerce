@@ -13,6 +13,9 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Development")); //, x => x.MigrationsAssembly("BlazorEcommerce.Infrastructure.Migrations")
 });
+
+
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
@@ -46,7 +49,11 @@ app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
 
+
+// call custom methods here
+//EnsureNewDatabase();
 SeedDatabase();
+//end call custom methods
 
 
 app.UseStaticFiles();
@@ -69,3 +76,15 @@ async void SeedDatabase() //can be placed at the very bottom under app.Run()
         await dbInitializer.SeedAsync();
     }
 }
+
+
+//async void EnsureNewDatabase()
+//{
+//    using (var scope = app.Services.CreateScope())
+//    {
+//        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
+//        await dbContext.Database.EnsureDeletedAsync();
+//        await dbContext.Database.EnsureCreatedAsync();
+//        //dbContext.Database.Migrate(); // this method is an alternative to ensuredeleted/created. those do not work well with migrations
+//    }
+//}

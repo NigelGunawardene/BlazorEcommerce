@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BlazorEcommerce.Shared.Enums;
-public enum Roles
+public enum Role
 {
     Customer = 0,
     Manager = 1,

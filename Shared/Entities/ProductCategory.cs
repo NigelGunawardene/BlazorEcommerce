@@ -12,4 +12,6 @@ public class ProductCategory : BaseEntity<int>
     public string Value { get; set; } = string.Empty;
     public bool IsActive { get; set; }
     public bool IsFeatured { get; set; }
+    public virtual ICollection<Product>? Products { get; set; }
+
 }
