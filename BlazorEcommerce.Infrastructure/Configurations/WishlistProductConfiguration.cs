@@ -11,6 +11,7 @@ public class WishlistProductConfiguration : IEntityTypeConfiguration<WishlistPro
 {
     public void Configure(EntityTypeBuilder<WishlistProduct> builder)
     {
+        builder.Property(wp => wp.Id).HasMaxLength(10);
         builder.Property(wp => wp.UserId).HasMaxLength(10).IsUnicode(false).IsRequired();
         builder.Property(wp => wp.ProductId).HasMaxLength(10).IsUnicode(false).IsRequired();
         builder.Property(wp => wp.AddedDate).HasDefaultValueSql("getutcdate()").HasMaxLength(20).IsUnicode(false).IsRequired();

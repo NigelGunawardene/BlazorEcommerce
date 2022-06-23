@@ -12,6 +12,7 @@ public class UserAuthenticationConfiguration : IEntityTypeConfiguration<UserAuth
 {
     public void Configure(EntityTypeBuilder<UserAuthentication> builder)
     {
+        builder.Property(ua => ua.Id).HasMaxLength(10);
         builder.Property(ua => ua.UserName).ValueGeneratedNever().HasMaxLength(100).IsUnicode(false).IsRequired();
         builder.Property(ua => ua.Password).ValueGeneratedNever().HasMaxLength(100).IsUnicode(false).IsRequired(false);
         builder.Property(ua => ua.Salt).ValueGeneratedNever().HasMaxLength(100).IsUnicode(false).IsRequired(false);

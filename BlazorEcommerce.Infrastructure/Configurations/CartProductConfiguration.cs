@@ -11,6 +11,7 @@ public class CartProductConfiguration : IEntityTypeConfiguration<CartProduct>
 {
     public void Configure(EntityTypeBuilder<CartProduct> builder)
     {
+        builder.Property(cp => cp.Id).HasMaxLength(10);
         builder.Property(cp => cp.ProductId).ValueGeneratedNever().HasMaxLength(20).IsUnicode(false).IsRequired();
         builder.Property(cp => cp.UserId).ValueGeneratedNever().HasMaxLength(20).IsUnicode(false).IsRequired();
         builder.Property(cp => cp.Quantity).ValueGeneratedNever().HasMaxLength(3).IsUnicode(false).IsRequired();

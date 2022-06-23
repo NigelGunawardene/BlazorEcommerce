@@ -11,10 +11,11 @@ public class ApplicationConfigurationConfiguration : IEntityTypeConfiguration<Ap
 {
     public void Configure(EntityTypeBuilder<ApplicationConfiguration> builder)
     {
+        builder.Property(ac => ac.Id).HasMaxLength(10);
         builder.Property(ac => ac.WelcomeMessage).ValueGeneratedNever().HasMaxLength(100).IsUnicode(false).IsRequired();
         builder.Property(ac => ac.PrimaryColor).ValueGeneratedNever().HasMaxLength(10).IsUnicode(false).IsRequired();
-        builder.Property(ac => ac.SecondaryColor).ValueGeneratedNever().HasMaxLength(20).IsUnicode(false).IsRequired();
-        builder.Property(ac => ac.AppName).ValueGeneratedNever().HasMaxLength(5).IsUnicode(false).IsRequired();
+        builder.Property(ac => ac.SecondaryColor).ValueGeneratedNever().HasMaxLength(10).IsUnicode(false).IsRequired();
+        builder.Property(ac => ac.AppName).ValueGeneratedNever().HasMaxLength(50).IsUnicode(false).IsRequired();
     }
 }
 

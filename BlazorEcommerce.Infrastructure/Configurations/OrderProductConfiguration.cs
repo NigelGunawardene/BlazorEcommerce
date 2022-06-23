@@ -11,6 +11,7 @@ public class OrderProductConfiguration : IEntityTypeConfiguration<OrderProduct>
 {
     public void Configure(EntityTypeBuilder<OrderProduct> builder)
     {
+        builder.Property(op => op.Id).HasMaxLength(10);
         builder.Property(op => op.OrderId).HasMaxLength(20).IsUnicode(false).IsRequired();
         builder.Property(op => op.ProductId).HasMaxLength(20).IsUnicode(false).IsRequired();
         builder.Property(op => op.Quantity).ValueGeneratedNever().HasMaxLength(6).IsUnicode(false).IsRequired();

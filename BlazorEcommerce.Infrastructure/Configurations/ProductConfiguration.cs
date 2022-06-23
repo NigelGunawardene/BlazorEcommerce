@@ -11,6 +11,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 {
     public void Configure(EntityTypeBuilder<Product> builder)
     {
+        builder.Property(p => p.Id).HasMaxLength(10);
         builder.HasIndex(p => p.Name).IsUnique();
         builder.Property(p => p.Name).ValueGeneratedNever().HasMaxLength(100).IsUnicode(false).IsRequired();
         builder.Property(p => p.Description).ValueGeneratedNever().HasMaxLength(2000).IsUnicode(false).IsRequired(false);

@@ -12,6 +12,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
     public void Configure(EntityTypeBuilder<Order> builder)
     {
         //builder.Ignore(e => e.OrderProducts);
+        builder.Property(o => o.Id).HasMaxLength(10);
         builder.Property(o => o.PublicOrderNumber).ValueGeneratedNever().HasMaxLength(20).IsUnicode(false).IsRequired();
         builder.Property(o => o.Message).ValueGeneratedNever().HasMaxLength(500).IsUnicode(false).IsRequired(false);
         builder.Property(o => o.UserId).HasMaxLength(20).IsUnicode(false).IsRequired();
