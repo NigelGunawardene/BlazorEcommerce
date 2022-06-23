@@ -15,17 +15,17 @@ public partial class VirtualizationServiceTests
     public void ShouldSkipAndTakeOnLoadFirstPageFromDataSource()
     {
         //given
-        int randomStartAt = GetRandomNumber();
-        int randomPageSize = GetRandomNumber();
-        int inputStartAt = randomStartAt;
-        int inputPageSize = randomPageSize;
+        uint randomStartAt = GetRandomPositiveNumber();
+        uint randomPageSize = GetRandomPositiveNumber();
+        uint inputStartAt = randomStartAt;
+        uint inputPageSize = randomPageSize;
         IQueryable<object> randomQueryable = CreateRandomQueryable();
 
         IQueryable<object> returnedQueryable = randomQueryable;
         IQueryable<object> expectedQueryable = returnedQueryable;
 
         this.dataSourceBrokerMock.Setup(source =>
-        source.TakeAndSkip(inputStartAt, inputPageSize)).Returns(returnedQueryable);
+        source.TakeSkip(inputStartAt, inputPageSize)).Returns(returnedQueryable);
 
         // when
         IQueryable<object> actualQueryable = this.virtualizationService.LoadFirstPage(inputStartAt, inputPageSize);
@@ -34,7 +34,7 @@ public partial class VirtualizationServiceTests
         actualQueryable.Should().BeEquivalentTo(expectedQueryable);
 
         this.dataSourceBrokerMock.Verify(source =>
-        source.TakeAndSkip(inputStartAt, inputPageSize), Times.Once);
+        source.TakeSkip(inputStartAt, inputPageSize), Times.Once);
 
         this.dataSourceBrokerMock.VerifyNoOtherCalls();
 

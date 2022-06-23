@@ -27,7 +27,9 @@ public partial class VirtualizationServiceTests
         virtualizationService = new VirtualizationService<object>(_dataSourceBroker: dataSourceBrokerMock.Object);
     }
 
-    private static int GetRandomNumber() => new IntRange(min: 0, max: 10).GetValue();
+    private static uint GetRandomPositiveNumber() => (uint)new IntRange(min: 0, max: 10).GetValue();
+
+    private static string GetRandomMessage() => new MnemonicString().GetValue();
 
     public static IQueryable<object> CreateRandomQueryable() => CreateQueryableFiller().Create().AsQueryable();
 

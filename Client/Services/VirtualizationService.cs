@@ -10,8 +10,8 @@ public class VirtualizationService<T> : IVirtualizationService<T>
     {
         dataSourceBroker = _dataSourceBroker;
     }
-    public IQueryable<T> LoadFirstPage(int startAt, int pageSize)
+    public IQueryable<T> LoadFirstPage(uint startAt, uint pageSize)
     {
-        return this.dataSourceBroker.TakeAndSkip(startAt, pageSize);
+        return this.dataSourceBroker.TakeSkip(startAt, pageSize);
     }
 }

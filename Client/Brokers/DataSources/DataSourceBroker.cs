@@ -8,6 +8,6 @@ public class DataSourceBroker<T> : IDataSourceBroker<T>
     {
         dataSource = _dataSource;
     }
-    public IQueryable<T> TakeAndSkip(int startAt, int pageSize) => this.dataSource.Skip(startAt).Take(pageSize);
+    public IQueryable<T> TakeSkip(uint startAt, uint pageSize) => this.dataSource.Skip((int)startAt).Take((int)pageSize);
 
 }
