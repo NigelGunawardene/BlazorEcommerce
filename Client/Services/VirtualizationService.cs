@@ -12,8 +12,6 @@ public class VirtualizationService<T> : IVirtualizationService<T>
     }
     public IQueryable<T> LoadFirstPage(int startAt, int pageSize)
     {
-        throw new NotImplementedException();
-        //return dataSource.Skip(startAt).Take(pageSize);
-
+        return this.dataSourceBroker.TakeAndSkip(startAt, pageSize);
     }
 }

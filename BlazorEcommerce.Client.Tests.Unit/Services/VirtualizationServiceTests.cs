@@ -9,6 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Tynamix.ObjectFiller;
 
+
+// we used xUnit template, nuget dependences are tynamix.objectfiller and fluentassertions so we can check values without references
+// First we tried to use IQueryable<object> but it didnt work, so we wrapped the IQueryable behind a contract. This is what IDataSourceBroker does. Brokers dont need unit tests because their purpose is to wrap what we cannot unit test because its out of scope. they should be very thin and only communicate with the outside world
+// Broker is under our control and we can test only what the broker is doing. we focus on what our service can control or owns vs anything else
+
 namespace BlazorEcommerce.Client.Tests.Unit.Services;
 public partial class VirtualizationServiceTests
 {
