@@ -1,4 +1,5 @@
 ﻿using BlazorEcommerce.Client.Brokers.DataSources;
+using BlazorEcommerce.Shared.Exceptions;
 
 namespace BlazorEcommerce.Client.Services;
 
@@ -12,6 +13,14 @@ public class VirtualizationService<T> : IVirtualizationService<T>
     }
     public IQueryable<T> LoadFirstPage(uint startAt, uint pageSize)
     {
-        return this.dataSourceBroker.TakeSkip(startAt, pageSize);
+        try
+        {
+            return this.dataSourceBroker.TakeSkip(startAt, pageSize);
+        }
+        catch (Exception ex)
+        {
+            VirtualizationServiceException virtualizationServiceException = new VirtualizationServiceException(ex);
+            throw virtualizationServiceException;
+        }
     }
 }
