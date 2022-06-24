@@ -1,12 +1,11 @@
 ﻿using BlazorEcommerce.Client.Brokers.DataSources;
-using BlazorEcommerce.Shared.Exceptions;
 
 namespace BlazorEcommerce.Client.Services;
 
 public partial class VirtualizationService<T> : IVirtualizationService<T>
 {
 
-    private uint position { get; set; }
+    private uint currentPosition { get; set; }
     private uint currentPageSize { get; set; }
     private readonly IDataSourceBroker<T> dataSourceBroker;
 
@@ -22,6 +21,14 @@ public partial class VirtualizationService<T> : IVirtualizationService<T>
 
             return this.dataSourceBroker.TakeSkip(position, pageSize);
         });
+
+    public IQueryable<T> RetrieveNextPage()
+    {
+        this.currentPosition += this.currentPageSize;
+        return this.dataSourceBroker.TakeSkip(currentPosition, currentPageSize);
+    }
+
+    public uint GetCurrentPosition() => this.currentPosition;
 
     public uint GetPageSize() => this.currentPageSize;
 
