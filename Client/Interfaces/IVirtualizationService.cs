@@ -2,7 +2,7 @@
 
 public interface IVirtualizationService<T>
 {
-    IQueryable<T> LoadFirstPage(uint position, uint pageSize);
+    IQueryable<T> LoadPage(uint startAt, uint pageSize);
     IQueryable<T> RetrieveNextPage();
     uint GetCurrentPosition();
     uint GetPageSize();

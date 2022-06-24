@@ -17,31 +17,36 @@ using Tynamix.ObjectFiller;
 namespace BlazorEcommerce.Client.Tests.Unit.Services;
 public partial class VirtualizationServiceTests
 {
+
     private readonly Mock<IDataSourceBroker<object>> dataSourceBrokerMock;
     private readonly IVirtualizationService<object> virtualizationService;
 
     public VirtualizationServiceTests()
     {
-        dataSourceBrokerMock = new Mock<IDataSourceBroker<object>>();
+        this.dataSourceBrokerMock = new Mock<IDataSourceBroker<object>>();
 
-        virtualizationService = new VirtualizationService<object>(_dataSourceBroker: dataSourceBrokerMock.Object);
+        this.virtualizationService = new VirtualizationService<object>(
+            dataSourceBroker: this.dataSourceBrokerMock.Object);
     }
 
-    private static uint GetRandomPositiveNumber() => (uint)new IntRange(min: 0, max: 10).GetValue();
+    private static uint GetRandomPositiveNumber() =>
+        (uint)new IntRange(min: 0, max: 10).GetValue();
 
-    private static string GetRandomMessage() => new MnemonicString().GetValue();
+    private static string GetRandomMessage() =>
+        new MnemonicString().GetValue();
 
-    public static IQueryable<object> CreateRandomQueryable() => CreateQueryableFiller().Create().AsQueryable();
+    public static IQueryable<object> CreateRandomQueryable() =>
+        CreateQueryableFiller().Create().AsQueryable();
 
-    private static object CreateRandomObject()
-    {
-        return new MnemonicString().GetValue();
-    }
+    private static object CreateRandomObject() =>
+        new MnemonicString().GetValue();
 
     public static Filler<List<object>> CreateQueryableFiller()
     {
         var filler = new Filler<List<object>>();
-        filler.Setup().OnType<object>().Use(CreateRandomObject());
+
+        filler.Setup()
+            .OnType<object>().Use(CreateRandomObject());
 
         return filler;
     }

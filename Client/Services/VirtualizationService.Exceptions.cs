@@ -4,17 +4,19 @@ namespace BlazorEcommerce.Client.Services;
 
 public partial class VirtualizationService<T>
 {
-    private delegate IQueryable<T> ReturningQueryableFunction<T>();
+    private delegate IQueryable<T> ReturningQueryableFunction();
 
-    private IQueryable<T> TryCatch(ReturningQueryableFunction<T> returningQueryableFunction)
+    private IQueryable<T> TryCatch(ReturningQueryableFunction returningQueryableFunction)
     {
         try
         {
             return returningQueryableFunction();
         }
-        catch (Exception ex)
+        catch (Exception exception)
         {
-            VirtualizationServiceException virtualizationServiceException = new VirtualizationServiceException(ex);
+            var virtualizationServiceException =
+                new VirtualizationServiceException(exception);
+
             throw virtualizationServiceException;
         }
     }

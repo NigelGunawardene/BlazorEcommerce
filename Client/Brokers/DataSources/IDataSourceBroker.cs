@@ -2,5 +2,5 @@
 
 public interface IDataSourceBroker<T>
 {
-    public IQueryable<T> TakeSkip(uint position, uint pageSize);
+    public IQueryable<T> TakeSkip(uint startAt, uint pageSize);
 }
