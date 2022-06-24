@@ -19,6 +19,8 @@ public partial class VirtualizationServiceTests
         uint randomPageSize = GetRandomPositiveNumber();
         uint inputStartAt = randomStartAt;
         uint inputPageSize = randomPageSize;
+        uint expectedPageSize = inputPageSize;
+
         IQueryable<object> randomQueryable = CreateRandomQueryable();
 
         IQueryable<object> returnedQueryable = randomQueryable;
@@ -30,8 +32,11 @@ public partial class VirtualizationServiceTests
         // when
         IQueryable<object> actualQueryable = this.virtualizationService.LoadFirstPage(inputStartAt, inputPageSize);
 
+        uint actualPageSize = this.virtualizationService.GetPageSize();
+
         // then
         actualQueryable.Should().BeEquivalentTo(expectedQueryable);
+        actualPageSize.Should().Be(expectedPageSize);
 
         this.dataSourceBrokerMock.Verify(source =>
         source.TakeSkip(inputStartAt, inputPageSize), Times.Once);
