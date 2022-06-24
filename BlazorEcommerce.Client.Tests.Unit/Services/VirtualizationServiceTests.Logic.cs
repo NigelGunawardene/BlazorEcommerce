@@ -1,12 +1,5 @@
-﻿using BlazorEcommerce.Client.Interfaces;
-using BlazorEcommerce.Client.Services;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlazorEcommerce.Client.Tests.Unit.Services;
 public partial class VirtualizationServiceTests
@@ -15,11 +8,12 @@ public partial class VirtualizationServiceTests
     public void ShouldSkipAndTakeOnLoadFirstPageFromDataSource()
     {
         //given
-        uint randomStartAt = GetRandomPositiveNumber();
+        uint randomPosition = GetRandomPositiveNumber();
         uint randomPageSize = GetRandomPositiveNumber();
-        uint inputStartAt = randomStartAt;
+        uint inputPosition = randomPosition;
         uint inputPageSize = randomPageSize;
         uint expectedPageSize = inputPageSize;
+        uint expectedPosition = inputPosition;
 
         IQueryable<object> randomQueryable = CreateRandomQueryable();
 
@@ -27,10 +21,10 @@ public partial class VirtualizationServiceTests
         IQueryable<object> expectedQueryable = returnedQueryable;
 
         this.dataSourceBrokerMock.Setup(source =>
-        source.TakeSkip(inputStartAt, inputPageSize)).Returns(returnedQueryable);
+        source.TakeSkip(inputPosition, inputPageSize)).Returns(returnedQueryable);
 
         // when
-        IQueryable<object> actualQueryable = this.virtualizationService.LoadFirstPage(inputStartAt, inputPageSize);
+        IQueryable<object> actualQueryable = this.virtualizationService.LoadFirstPage(inputPosition, inputPageSize);
 
         uint actualPageSize = this.virtualizationService.GetPageSize();
 
@@ -39,7 +33,7 @@ public partial class VirtualizationServiceTests
         actualPageSize.Should().Be(expectedPageSize);
 
         this.dataSourceBrokerMock.Verify(source =>
-        source.TakeSkip(inputStartAt, inputPageSize), Times.Once);
+        source.TakeSkip(inputPosition, inputPageSize), Times.Once);
 
         this.dataSourceBrokerMock.VerifyNoOtherCalls();
 

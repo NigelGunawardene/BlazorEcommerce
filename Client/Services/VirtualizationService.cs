@@ -6,7 +6,7 @@ namespace BlazorEcommerce.Client.Services;
 public partial class VirtualizationService<T> : IVirtualizationService<T>
 {
 
-    private uint StartAt { get; set; }
+    private uint position { get; set; }
     private uint currentPageSize { get; set; }
     private readonly IDataSourceBroker<T> dataSourceBroker;
 
@@ -15,12 +15,12 @@ public partial class VirtualizationService<T> : IVirtualizationService<T>
     {
         dataSourceBroker = _dataSourceBroker;
     }
-    public IQueryable<T> LoadFirstPage(uint startAt, uint pageSize) =>
+    public IQueryable<T> LoadFirstPage(uint position, uint pageSize) =>
         TryCatch(() =>
         {
             this.currentPageSize = pageSize;
 
-            return this.dataSourceBroker.TakeSkip(startAt, pageSize);
+            return this.dataSourceBroker.TakeSkip(position, pageSize);
         });
 
     public uint GetPageSize() => this.currentPageSize;

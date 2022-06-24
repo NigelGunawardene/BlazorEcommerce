@@ -9,7 +9,7 @@ public partial class VirtualizationServiceTests
     public void ShouldThrowServiceExceptionOnTakeSkipIfServiceErrorOccurs()
     {
         // given
-        uint someStartAt = GetRandomPositiveNumber();
+        uint somePosition = GetRandomPositiveNumber();
         uint somePageSize = GetRandomPositiveNumber();
         string randomMessage = GetRandomMessage();
         var serviceException = new Exception(randomMessage);
@@ -19,7 +19,7 @@ public partial class VirtualizationServiceTests
         this.dataSourceBrokerMock.Setup(broker => broker.TakeSkip(It.IsAny<uint>(), It.IsAny<uint>())).Throws(serviceException);
 
         // when
-        Action takeSkipAction = () => this.virtualizationService.LoadFirstPage(someStartAt, somePageSize);
+        Action takeSkipAction = () => this.virtualizationService.LoadFirstPage(somePosition, somePageSize);
 
         // then
         Assert.Throws<VirtualizationServiceException>(takeSkipAction);
