@@ -1,29 +1,18 @@
 ﻿@page "/productlist"
 
 <h3>ProductList</h3>
-@if (ProductService.Products == null || ProductService.Products.Count == 0)
+@*@if (ProductService.Products == null || ProductService.Products.Count == 0)
 {
     <span>Loading products...</span>
-}
-else
-{
-    <ul class="list-unstyled">
-        @foreach (var product in ProductService.Products)
-        {
-            <li class="oi-media-pause my-3">
-                <div class="media-img-wrapper mr-2">
-                    <a href="/product/@product.Id">
-                        <img class="media-img" src="@product.ImageUrl" alt="@product.Name">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <a href="/product/@product.Id">
-                        <h4 class="mb-0">@product.Name</h4>
-                    </a>
-                    <p>@product.Description</p>
-                    <h5 class="price">LKR @product.Price</h5>
-                </div>
-            </li>
-        }
-    </ul>
+}*@
+
+@*    <Virtualize Items="ProductService.Products" Context="product">
+        <IndividualProduct Product=product></IndividualProduct>
+    </Virtualize>*@
+
+@*<Virtualize ItemsProvider="@LoadVisibleProducts" 
+    Context="product"
+    OverscanCount=5>
+        <IndividualProduct Product=product></IndividualProduct>
+</Virtualize>*@
 }
