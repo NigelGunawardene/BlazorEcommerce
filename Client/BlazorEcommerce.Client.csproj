@@ -11,6 +11,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.5" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.5" PrivateAssets="all" />
         <PackageReference Include="MudBlazor" Version="6.0.10" />
+        <PackageReference Include="PrettyBlazor" Version="1.2.0" />
     </ItemGroup>
 
     <ItemGroup>
