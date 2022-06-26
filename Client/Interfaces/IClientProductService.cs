@@ -6,4 +6,5 @@ public interface IClientProductService
     Task GetProducts();
 
     Task<ServiceResponse<Product>> GetProduct(int productId);
+    Task<ServiceResponse<ICollection<Product>>> GetPaginatedProducts(int startIndex, int pageSize);
 }

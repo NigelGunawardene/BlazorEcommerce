@@ -39,4 +39,15 @@ public class ProductService : IProductService
 
         return response;
     }
+
+    public async Task<ServiceResponse<ICollection<Product>>> GetPaginatedProductsAsync(int startIndex, int pageSize)
+    {
+        var response = new ServiceResponse<ICollection<Product>>();
+        response.Message = $"{startIndex} {pageSize}";
+        response.Data = await _context.Products.Skip(startIndex).Take(pageSize).OrderBy(product => product.Id).ToListAsync();
+        response.Success = true;
+        //response.
+        return response;
+
+    }
 }

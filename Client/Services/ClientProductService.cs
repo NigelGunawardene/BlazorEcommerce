@@ -1,4 +1,6 @@
-﻿namespace BlazorEcommerce.Client.Services;
+﻿using Microsoft.AspNetCore.Components.Web.Virtualization;
+
+namespace BlazorEcommerce.Client.Services;
 
 public class ClientProductService : IClientProductService
 {
@@ -22,4 +24,16 @@ public class ClientProductService : IClientProductService
         var result = await _http.GetFromJsonAsync<ServiceResponse<Product>>($"api/Product/{productId}");
         return result;
     }
+
+    public async Task<ServiceResponse<ICollection<Product>>> GetPaginatedProducts(int startIndex, int pageSize)
+    {
+        var result = await _http.GetFromJsonAsync<ServiceResponse<ICollection<Product>>>($"api/Product/Paginated?startIndex={startIndex}&pageSize={pageSize}");
+        return result;
+    }
+
+    //public async ValueTask<ItemsProviderResult<Product>> GetPaginatedProducts(ItemsProviderRequest request)
+    //{
+    //    Console.WriteLine($"{request.StartIndex} {request.Count}");
+    //    return new ItemsProviderResult<Product>(new List<Product>(), 10);
+    //}
 }
