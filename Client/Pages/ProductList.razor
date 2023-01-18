@@ -1,18 +1,18 @@
 ﻿@page "/productlist"
 
 <h3>ProductList</h3>
-@*@if (ProductService.Products == null || ProductService.Products.Count == 0)
+@if (ProductService.Products == null || ProductService.Products.Count == 0)
 {
     <span>Loading products...</span>
-}*@
+}
 
 @*    <Virtualize Items="ProductService.Products" Context="product">
         <IndividualProduct Product=product></IndividualProduct>
     </Virtualize>*@
 
-@*<Virtualize ItemsProvider="@LoadVisibleProducts" 
+<Virtualize ItemsProvider="@LoadVisibleProducts" 
     Context="product"
     OverscanCount=5>
         <IndividualProduct Product=product></IndividualProduct>
-</Virtualize>*@
+</Virtualize>
 }
