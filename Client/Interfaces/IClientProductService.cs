@@ -3,8 +3,9 @@
 public interface IClientProductService
 {
     List<Product> Products { get; set; }
-    Task GetProducts();
+    Task GetProductsAsync();
 
-    Task<ServiceResponse<Product>> GetProduct(int productId);
-    Task<ServiceResponse<ICollection<Product>>> GetPaginatedProducts(int startIndex, int pageSize);
+    Task<ServiceResponse<Product>> GetProductByIdAsync(int productId);
+    Task<int> GetProductsCountAsync();
+    Task<ServiceResponse<ICollection<Product>>> GetPaginatedProductsAsync(int startIndex, int pageSize);
 }

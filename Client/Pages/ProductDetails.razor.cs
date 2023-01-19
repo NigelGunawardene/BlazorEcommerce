@@ -14,7 +14,7 @@ partial class ProductDetails
     protected override async Task OnParametersSetAsync()
     {
         message = "loading product..";
-        var result = await ProductService.GetProduct(Id);
+        var result = await ProductService.GetProductByIdAsync(Id);
         if (!result.Success)
         {
             message = result.Message;

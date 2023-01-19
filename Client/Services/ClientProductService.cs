@@ -13,21 +13,28 @@ public class ClientProductService : IClientProductService
         _http = http;
     }
 
-    public async Task GetProducts()
+    public async Task GetProductsAsync()
     {
         var result = await _http.GetFromJsonAsync<ServiceResponse<List<Product>>>("api/Product");
         if (result != null && result.Data != null) Products = result.Data;
     }
 
-    public async Task<ServiceResponse<Product>> GetProduct(int productId)
+    public async Task<ServiceResponse<Product>> GetProductByIdAsync(int productId)
     {
         var result = await _http.GetFromJsonAsync<ServiceResponse<Product>>($"api/Product/{productId}");
         return result;
     }
 
-    public async Task<ServiceResponse<ICollection<Product>>> GetPaginatedProducts(int startIndex, int pageSize)
+    public async Task<ServiceResponse<ICollection<Product>>> GetPaginatedProductsAsync(int startIndex, int pageSize)
     {
         var result = await _http.GetFromJsonAsync<ServiceResponse<ICollection<Product>>>($"api/Product/Paginated?startIndex={startIndex}&pageSize={pageSize}");
+        Products = result.Data.ToList();
+        return result;
+    }
+
+    public async Task<int> GetProductsCountAsync()
+    {
+        var result = await _http.GetFromJsonAsync<int>("api/Product/Count");
         return result;
     }
 

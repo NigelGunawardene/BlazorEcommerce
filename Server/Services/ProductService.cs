@@ -36,7 +36,6 @@ public class ProductService : IProductService
             response.Message = "Done";
             response.Data = product;
         }
-
         return response;
     }
 
@@ -46,8 +45,12 @@ public class ProductService : IProductService
         response.Message = $"{startIndex} {pageSize}";
         response.Data = await _context.Products.Skip(startIndex).Take(pageSize).OrderBy(product => product.Id).ToListAsync();
         response.Success = true;
-        //response.
+        response.TotalCount = await _context.Products.CountAsync();
         return response;
+    }
 
+    public Task<int> GetProductsCountAsync()
+    {
+        return _context.Products.CountAsync();
     }
 }

@@ -9,11 +9,18 @@ public partial class ProductList
 
     private static List<Product> Products = new List<Product>();
 
+    private int totalCount = 1000;
+
+
+    [Parameter]
+    public EventCallback<Product> OnScroll { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
+        totalCount = await ProductService.GetProductsCountAsync();
         //await ProductService.GetProducts(); // UNCOMMENT THIS LATER
-        var result = await ProductService.GetPaginatedProducts(0, 100);
-        Products = result.Data.ToList();
+        //var result = await ProductService.GetPaginatedProducts(0, 100);
+        //Products = result.Data.ToList();
 
 
         //var result = await Http.GetFromJsonAsync<ServiceResponse<List<Product>>>("api/Product");
@@ -23,16 +30,17 @@ public partial class ProductList
 
     private async ValueTask<ItemsProviderResult<Product>> LoadVisibleProducts(ItemsProviderRequest request)
     {
-        var numProducts = Math.Min(request.Count, 10000 - request.StartIndex); //var numEmployees = Math.Min(request.Count, totalEmployees - request.StartIndex);
-        var result = await ProductService.GetPaginatedProducts(request.StartIndex, 40);
-        return new ItemsProviderResult<Product>(result.Data, result.Data.Count);
+        var numEmployees = Math.Min(request.Count, totalCount - request.StartIndex);
+        var result = await ProductService.GetPaginatedProductsAsync(request.StartIndex, numEmployees);
+        //totalCount = result.TotalCount;
+        return new ItemsProviderResult<Product>(result.Data, result.TotalCount);
     }
 
-    private async Task<ICollection<Product>?> TestLoad()
-    {
-        var numProducts = Math.Min(10, 10000);
-        var result = await ProductService.GetPaginatedProducts(0, 10);
-        Products = result.Data.ToList();
-        return result.Data;
-    }
+    //private async Task<ICollection<Product>?> TestLoad()
+    //{
+    //    var numProducts = Math.Min(10, 10000);
+    //    var result = await ProductService.GetPaginatedProducts(0, 10);
+    //    Products = result.Data.ToList();
+    //    return result.Data;
+    //}
 }

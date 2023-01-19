@@ -22,6 +22,13 @@ public class ProductController : ControllerBase
         return Ok(response);
     }
 
+    [HttpGet("Count")]
+    public async Task<ActionResult<int>> GetProductsCount() //IActionResult
+    {
+        var response = await _productService.GetProductsCountAsync();
+        return Ok(response);
+    }
+
 
     [HttpGet("Paginated")]
     public async Task<ActionResult<ServiceResponse<ICollection<Product>>>> GetPaginatedProducts(int startIndex, int pageSize) //IActionResult
@@ -34,7 +41,7 @@ public class ProductController : ControllerBase
 
     [HttpGet("{productId}")]
     //[Route("{productId}")]
-    public async Task<ActionResult<ServiceResponse<Product>>> GetProduct(int productId) //IActionResult
+    public async Task<ActionResult<ServiceResponse<Product>>> GetProductById(int productId) //IActionResult
     {
         var response = await _productService.GetProductAsync(productId);
         return Ok(response);
